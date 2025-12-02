@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and manage your saved favorite recipes.">
+    <title>My Favorites - Recipe Finder</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-utensils logo-icon"></i>
+                Recipe Finder
+            </a>
+            
+            <!-- Navigation Menu -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-search"></i> Search
+                </a>
+                <a href="favorites.html" class="nav-link active">
+                    <i class="fa-solid fa-heart"></i> Favorites
+                </a>
+                <a href="#" class="nav-link" id="shoppingListLink">
+                    <i class="fa-solid fa-shopping-cart"></i> Shopping List
+                </a>
+                <a href="#" class="nav-link" id="mealPlannerLink">
+                    <i class="fa-solid fa-calendar"></i> Meal Planner
+                </a>
+            </nav>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-wrapper">
+        <div class="page-container">
+            
+            <!-- Page Header -->
+            <section class="page-header mb-xl">
+                <h1 class="text-center">
+                    <i class="fa-solid fa-heart" style="color: var(--color-primary-red);"></i>
+                    My Favorite Recipes
+                </h1>
+                <p class="text-center text-secondary">Your collection of saved recipes</p>
+            </section>
+
+            <!-- Favorites Actions -->
+            <div class="flex-between mb-lg">
+                <p class="text-secondary">
+                    <span id="favoritesCount">0</span> saved recipes
+                </p>
+                <button class="btn btn-outline" id="clearAllFavoritesBtn">
+                    <i class="fa-solid fa-trash"></i>
+                    Clear All Favorites
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-state hidden" id="loadingState">
+                <div class="flex-center" style="padding: 4rem 0;">
+                    <div class="spinner spinner-lg"></div>
+                </div>
+                <p class="text-center text-secondary">Loading your favorites...</p>
+            </div>
+
+            <!-- Empty State (No Favorites) -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-icon">
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <h2 class="empty-state-title">No Favorites Yet</h2>
+                <p class="empty-state-text">
+                    Start adding recipes to your favorites to see them here!
+                </p>
+                <a href="index.html" class="btn btn-primary mt-lg">
+                    <i class="fa-solid fa-search"></i>
+                    Explore Recipes
+                </a>
+            </div>
+
+            <!-- Favorites Grid -->
+            <div class="recipe-grid hidden" id="favoritesGrid">
+                <!-- Favorite recipe cards will be inserted here by JavaScript -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Recipe Finder.</p>
+            <p class="mt-sm">
+                <small>Powered by Spoonacular, Nutritionix & Unsplash APIs</small>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT MODULES ========== -->
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
