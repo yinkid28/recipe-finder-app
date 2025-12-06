@@ -223,6 +223,27 @@ const storage = {
         return this.set(this.KEYS.SHOPPING_LIST, []);
     },
 
+    /**
+     * Update shopping list item
+     * @param {number} itemId - Item ID
+     * @param {object} updates - Object with properties to update
+     * @returns {boolean} Success status
+     */
+    updateShoppingListItem(itemId, updates) {
+        const shoppingList = this.getShoppingList();
+        const itemIndex = shoppingList.findIndex(item => item.id === itemId);
+        
+        if (itemIndex !== -1) {
+            shoppingList[itemIndex] = {
+                ...shoppingList[itemIndex],
+                ...updates
+            };
+            return this.set(this.KEYS.SHOPPING_LIST, shoppingList);
+        }
+        
+        return false;
+    },
+
     // ============ MEAL PLAN ============
 
     /**

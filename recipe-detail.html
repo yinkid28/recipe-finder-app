@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="View detailed recipe information, ingredients, and nutritional data">
+    <meta name="description" content="View detailed recipe information, ingredients, instructions, and nutrition facts.">
     <title>Recipe Details - Recipe Finder</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <!-- ========== HEADER / NAVIGATION ========== -->
+    
+    <!-- ========== HEADER ========== -->
     <header class="header">
         <div class="header-container">
             <!-- Logo -->
@@ -27,7 +28,7 @@
                 <i class="fa-solid fa-utensils logo-icon"></i>
                 Recipe Finder
             </a>
-
+            
             <!-- Navigation Menu -->
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">
@@ -36,14 +37,14 @@
                 <a href="favorites.html" class="nav-link">
                     <i class="fa-solid fa-heart"></i> Favorites
                 </a>
-                <a href="#" class="nav-link" id="shoppingListLink">
+                <a href="shopping-list.html" class="nav-link">
                     <i class="fa-solid fa-shopping-cart"></i> Shopping List
                 </a>
                 <a href="#" class="nav-link" id="mealPlannerLink">
-                    <i class="fa-solid fa-calendar-alt"></i> Meal Planner
+                    <i class="fa-solid fa-calendar"></i> Meal Planner
                 </a>
             </nav>
-
+            
             <!-- Mobile Menu Toggle -->
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
                 <i class="fa-solid fa-bars"></i>
@@ -54,6 +55,7 @@
     <!-- ========== MAIN CONTENT ========== -->
     <main class="main-wrapper">
         <div class="page-container">
+            
             <!-- Back Button -->
             <div class="mb-lg">
                 <a href="index.html" class="btn btn-outline">
@@ -62,26 +64,34 @@
                 </a>
             </div>
 
-            <!-- Loading Spinner -->
-            <div class="loading-container text-center hidden" id="loadingSpinner">
-                <div class="spinner"></div>
-                <p class="mt-md">Loading recipe details...</p>
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState">
+                <div class="flex-center" style="padding: 4rem 0;">
+                    <div class="spinner spinner-lg"></div>
+                </div>
+                <p class="text-center text-secondary">Loading recipe details...</p>
             </div>
 
             <!-- Recipe Detail Container -->
             <div class="recipe-detail-container hidden" id="recipeDetailContainer">
+                
                 <!-- Recipe Header -->
                 <div class="recipe-detail-header">
-                    <h1 class="recipe-detail-title" id="recipeTitle">
-                        <!-- Recipe title inserted here -->
-                    </h1>
-
+                    <h1 class="recipe-detail-title" id="recipeTitle">Recipe Title</h1>
+                    
                     <!-- Action Buttons -->
                     <div class="flex-between mb-lg">
-                        <div class="flex" style="gap: var(--spacing-md);">
-                            <button class="btn btn-primary" id="addToFavoritesBtn">
-                                <i class="fa-solid fa-heart"></i>
-                                Save to Favorites
+                        <div class="flex gap-md">
+                            <span class="badge badge-primary" id="cuisineBadge">Cuisine</span>
+                            <span class="badge badge-secondary" id="difficultyBadge">Medium</span>
+                        </div>
+                        <div class="flex gap-sm">
+                            <button class="btn-icon" id="favoriteBtn" aria-label="Add to favorites">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="btn btn-primary" id="addToShoppingListBtn">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                Add to Shopping List
                             </button>
                             <button class="btn btn-secondary" id="addToMealPlanBtn">
                                 <i class="fa-solid fa-calendar-plus"></i>
@@ -93,137 +103,124 @@
                     <!-- Recipe Image -->
                     <img 
                         src="" 
-                        alt="Recipe" 
+                        alt="Recipe Image" 
                         class="recipe-detail-image" 
                         id="recipeImage"
                     >
+                </div>
 
-                    <!-- Recipe Meta Information -->
-                    <div class="recipe-meta-grid">
-                        <div class="recipe-meta-card">
-                            <div class="recipe-meta-label">
-                                <i class="fa-solid fa-clock"></i> Prep Time
-                            </div>
-                            <div class="recipe-meta-value" id="prepTime">--</div>
+                <!-- Recipe Meta Information -->
+                <div class="recipe-meta-grid">
+                    <div class="recipe-meta-card">
+                        <div class="recipe-meta-label">
+                            <i class="fa-solid fa-clock"></i> Prep Time
                         </div>
-
-                        <div class="recipe-meta-card">
-                            <div class="recipe-meta-label">
-                                <i class="fa-solid fa-fire"></i> Cook Time
-                            </div>
-                            <div class="recipe-meta-value" id="cookTime">--</div>
-                        </div>
-
-                        <div class="recipe-meta-card">
-                            <div class="recipe-meta-label">
-                                <i class="fa-solid fa-hourglass-half"></i> Total Time
-                            </div>
-                            <div class="recipe-meta-value" id="totalTime">--</div>
-                        </div>
-
-                        <div class="recipe-meta-card">
-                            <div class="recipe-meta-label">
-                                <i class="fa-solid fa-user-group"></i> Servings
-                            </div>
-                            <div class="recipe-meta-value" id="servings">--</div>
-                        </div>
+                        <div class="recipe-meta-value" id="prepTime">--</div>
                     </div>
-
-                    <!-- Serving Size Adjuster -->
-                    <div class="text-center mt-md">
-                        <label class="input-label">Adjust Servings:</label>
-                        <div class="flex-center" style="gap: var(--spacing-md);">
-                            <button class="btn btn-icon" id="decreaseServings">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                            <span class="recipe-meta-value" id="currentServings">4</span>
-                            <button class="btn btn-icon" id="increaseServings">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
+                    <div class="recipe-meta-card">
+                        <div class="recipe-meta-label">
+                            <i class="fa-solid fa-fire"></i> Cook Time
                         </div>
+                        <div class="recipe-meta-value" id="cookTime">--</div>
                     </div>
-
-                    <!-- Dietary & Cuisine Badges -->
-                    <div class="mt-lg" id="recipeBadges">
-                        <!-- Badges will be inserted here -->
+                    <div class="recipe-meta-card">
+                        <div class="recipe-meta-label">
+                            <i class="fa-solid fa-utensils"></i> Servings
+                        </div>
+                        <div class="recipe-meta-value" id="servings">--</div>
+                    </div>
+                    <div class="recipe-meta-card">
+                        <div class="recipe-meta-label">
+                            <i class="fa-solid fa-chart-simple"></i> Difficulty
+                        </div>
+                        <div class="recipe-meta-value" id="difficulty">--</div>
                     </div>
                 </div>
 
-                <!-- Two Column Layout: Instructions + Nutrition -->
+                <!-- Serving Size Adjuster -->
+                <div class="flex-center mb-xl">
+                    <div class="flex gap-md" style="align-items: center;">
+                        <span class="text-secondary">Adjust Servings:</span>
+                        <button class="btn-icon" id="decreaseServings" aria-label="Decrease servings">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span class="text-primary" style="font-size: var(--font-size-h3); font-weight: var(--font-weight-semibold);" id="currentServings">4</span>
+                        <button class="btn-icon" id="increaseServings" aria-label="Increase servings">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recipe Content Layout: Instructions + Nutrition -->
                 <div class="recipe-content-layout">
+                    
                     <!-- Left Column: Ingredients & Instructions -->
                     <div>
                         <!-- Ingredients Section -->
                         <section class="ingredients-section mb-xl">
-                            <h2>
+                            <h2 class="mb-md">
                                 <i class="fa-solid fa-list"></i> Ingredients
                             </h2>
-                            <ul class="ingredients-list mt-md" id="ingredientsList">
-                                <!-- Ingredients will be inserted here -->
+                            <ul class="ingredients-list" id="ingredientsList">
+                                <!-- Ingredients will be inserted here by JavaScript -->
                             </ul>
-                            <button class="btn btn-outline mt-md" id="addIngredientsToListBtn" style="width: 100%;">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                Add Missing Ingredients to Shopping List
-                            </button>
                         </section>
 
                         <!-- Instructions Section -->
                         <section class="instructions-section">
-                            <h2>
+                            <h2 class="mb-lg">
                                 <i class="fa-solid fa-book-open"></i> Instructions
                             </h2>
-                            <div class="mt-lg" id="instructionsContainer">
-                                <!-- Instructions will be inserted here -->
+                            <div id="instructionsList">
+                                <!-- Instructions will be inserted here by JavaScript -->
                             </div>
                         </section>
                     </div>
 
                     <!-- Right Column: Nutrition Panel -->
                     <aside>
-                        <div class="nutrition-panel" id="nutritionPanel">
+                        <div class="nutrition-panel">
                             <h3 class="nutrition-title">
-                                <i class="fa-solid fa-chart-pie"></i> Nutrition Facts
+                                <i class="fa-solid fa-chart-pie"></i><br>
+                                Nutrition Facts
                             </h3>
-                            <p class="text-center text-secondary mb-md">Per Serving</p>
-
-                            <!-- Loading Nutrition -->
-                            <div class="text-center hidden" id="nutritionLoading">
-                                <div class="spinner spinner-sm"></div>
-                                <p class="mt-sm">Loading nutrition data...</p>
-                            </div>
-
-                            <!-- Nutrition Items Container -->
+                            <p class="text-center text-secondary mb-lg" style="font-size: var(--font-size-small);">
+                                Per Serving
+                            </p>
+                            
+                            <!-- Nutrition Items (Will be populated by JavaScript) -->
                             <div id="nutritionItems">
-                                <!-- Nutrition items will be inserted here -->
+                                <!-- Nutrition data will be inserted here -->
                             </div>
 
                             <div class="divider"></div>
 
-                            <!-- Nutrition Summary -->
-                            <div class="text-center">
-                                <p class="text-secondary" style="font-size: var(--font-size-tiny);">
-                                    Nutritional information is approximate
-                                </p>
-                            </div>
+                            <p class="text-center text-secondary" style="font-size: var(--font-size-tiny);">
+                                <i class="fa-solid fa-info-circle"></i>
+                                Nutritional information is approximate
+                            </p>
                         </div>
                     </aside>
+
                 </div>
+
             </div>
 
             <!-- Error State -->
             <div class="empty-state hidden" id="errorState">
                 <div class="empty-state-icon">
-                    <i class="fa-solid fa-exclamation-triangle" style="color: var(--color-error);"></i>
+                    <i class="fa-solid fa-exclamation-triangle"></i>
                 </div>
                 <h2 class="empty-state-title">Recipe Not Found</h2>
                 <p class="empty-state-text">
-                    The recipe you're looking for doesn't exist or has been removed.
+                    We couldn't load this recipe. Please try again or go back to search.
                 </p>
                 <a href="index.html" class="btn btn-primary mt-lg">
                     <i class="fa-solid fa-search"></i>
-                    Search for Recipes
+                    Back to Search
                 </a>
             </div>
+
         </div>
     </main>
 
@@ -239,5 +236,6 @@
 
     <!-- ========== JAVASCRIPT MODULES ========== -->
     <script type="module" src="js/app.js"></script>
+
 </body>
 </html>

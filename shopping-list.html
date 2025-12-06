@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your shopping list with organized categories and easy checking.">
+    <title>Shopping List - Recipe Finder</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-utensils logo-icon"></i>
+                Recipe Finder
+            </a>
+            
+            <!-- Navigation Menu -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-search"></i> Search
+                </a>
+                <a href="favorites.html" class="nav-link">
+                    <i class="fa-solid fa-heart"></i> Favorites
+                </a>
+                <a href="shopping-list.html" class="nav-link active">
+                    <i class="fa-solid fa-shopping-cart"></i> Shopping List
+                </a>
+                <a href="#" class="nav-link" id="mealPlannerLink">
+                    <i class="fa-solid fa-calendar"></i> Meal Planner
+                </a>
+            </nav>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-wrapper">
+        <div class="page-container">
+            
+            <!-- Page Header -->
+            <section class="page-header mb-xl">
+                <h1 class="text-center">
+                    <i class="fa-solid fa-shopping-cart" style="color: var(--color-primary-green);"></i>
+                    Shopping List
+                </h1>
+                <p class="text-center text-secondary">Organize your grocery shopping by category</p>
+            </section>
+
+            <!-- Shopping List Actions -->
+            <div class="card mb-lg" style="padding: var(--spacing-lg);">
+                <div class="flex-between mb-md">
+                    <div>
+                        <p class="text-secondary">
+                            <i class="fa-solid fa-list"></i>
+                            <span id="totalItemsCount">0</span> total items
+                            <span class="ml-md">•</span>
+                            <span id="checkedItemsCount">0</span> checked
+                        </p>
+                    </div>
+                    <div class="flex gap-sm">
+                        <button class="btn btn-outline btn-sm" id="clearCheckedBtn">
+                            <i class="fa-solid fa-check-double"></i>
+                            Clear Checked
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="clearAllBtn">
+                            <i class="fa-solid fa-trash"></i>
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Add Item Form -->
+                <div class="flex gap-sm">
+                    <div style="flex: 1;">
+                        <input 
+                            type="text" 
+                            class="input-field" 
+                            id="newItemInput"
+                            placeholder="Add new item (e.g., 2 cups rice)"
+                            style="margin-bottom: 0;"
+                        >
+                    </div>
+                    <button class="btn btn-primary" id="addItemBtn">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Item
+                    </button>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h2 class="empty-state-title">Your Shopping List is Empty</h2>
+                <p class="empty-state-text">
+                    Add items manually or add ingredients from recipes!
+                </p>
+                <a href="index.html" class="btn btn-primary mt-lg">
+                    <i class="fa-solid fa-search"></i>
+                    Browse Recipes
+                </a>
+            </div>
+
+            <!-- Shopping List by Categories -->
+            <div id="shoppingListContainer" class="hidden">
+                
+                <!-- Produce Category -->
+                <div class="category-section" id="category-produce" style="display: none;">
+                    <h3 class="mb-md">
+                        <i class="fa-solid fa-carrot" style="color: var(--color-primary-green);"></i>
+                        Produce
+                    </h3>
+                    <div class="shopping-list-container mb-xl">
+                        <div class="shopping-list-items" id="produce-items">
+                            <!-- Items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meat Category -->
+                <div class="category-section" id="category-meat" style="display: none;">
+                    <h3 class="mb-md">
+                        <i class="fa-solid fa-drumstick-bite" style="color: var(--color-primary-red);"></i>
+                        Meat & Seafood
+                    </h3>
+                    <div class="shopping-list-container mb-xl">
+                        <div class="shopping-list-items" id="meat-items">
+                            <!-- Items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dairy Category -->
+                <div class="category-section" id="category-dairy" style="display: none;">
+                    <h3 class="mb-md">
+                        <i class="fa-solid fa-cheese" style="color: var(--color-warning);"></i>
+                        Dairy & Eggs
+                    </h3>
+                    <div class="shopping-list-container mb-xl">
+                        <div class="shopping-list-items" id="dairy-items">
+                            <!-- Items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pantry Category -->
+                <div class="category-section" id="category-pantry" style="display: none;">
+                    <h3 class="mb-md">
+                        <i class="fa-solid fa-jar" style="color: var(--color-primary-orange);"></i>
+                        Pantry Staples
+                    </h3>
+                    <div class="shopping-list-container mb-xl">
+                        <div class="shopping-list-items" id="pantry-items">
+                            <!-- Items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frozen Category -->
+                <div class="category-section" id="category-frozen" style="display: none;">
+                    <h3 class="mb-md">
+                        <i class="fa-solid fa-snowflake" style="color: var(--color-info);"></i>
+                        Frozen Foods
+                    </h3>
+                    <div class="shopping-list-container mb-xl">
+                        <div class="shopping-list-items" id="frozen-items">
+                            <!-- Items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beverages Category -->
+                <div class="category-section" id="category-beverages" style="display: none;">
+                    <h3 class="mb-md">
+                        <i class="fa-solid fa-mug-hot" style="color: var(--color-primary-red);"></i>
+                        Beverages
+                    </h3>
+                    <div class="shopping-list-container mb-xl">
+                        <div class="shopping-list-items" id="beverages-items">
+                            <!-- Items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Category -->
+                <div class="category-section" id="category-other" style="display: none;">
+                    <h3 class="mb-md">
+                        <i class="fa-solid fa-box" style="color: var(--color-medium-gray);"></i>
+                        Other
+                    </h3>
+                    <div class="shopping-list-container mb-xl">
+                        <div class="shopping-list-items" id="other-items">
+                            <!-- Items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Recipe Finder</p>
+            <p class="mt-sm">
+                <small>Powered by Spoonacular, Nutritionix & Unsplash APIs</small>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT MODULES ========== -->
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

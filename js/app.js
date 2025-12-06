@@ -30,6 +30,9 @@ const app = {
             case 'favorites':
                 this.initFavoritesPage();
                 break;
+            case 'shopping-list':
+                this.initShoppingListPage();
+                break;
             default:
                 console.log('Unknown page');
         }
@@ -48,6 +51,7 @@ const app = {
         if (page === '' || page === 'index.html') return 'index';
         if (page === 'recipe-detail.html') return 'recipe-detail';
         if (page === 'favorites.html') return 'favorites';
+        if (page === 'shopping-list.html') return 'shopping-list';
         
         return 'index'; // Default
     },
@@ -90,21 +94,21 @@ const app = {
      * Setup navigation links
      */
     setupNavigation() {
-        // Shopping list link
-        const shoppingListLink = document.getElementById('shoppingListLink');
-        if (shoppingListLink) {
-            shoppingListLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                utils.showToast('Shopping List feature coming in Week 6!', 'info');
+        // Shopping list link - now works!
+        const shoppingListLinks = document.querySelectorAll('[href="shopping-list.html"], #shoppingListLink');
+        shoppingListLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Let it navigate normally, remove preventDefault
+                link.href = 'shopping-list.html';
             });
-        }
+        });
         
         // Meal planner link
         const mealPlannerLink = document.getElementById('mealPlannerLink');
         if (mealPlannerLink) {
             mealPlannerLink.addEventListener('click', (e) => {
                 e.preventDefault();
-                utils.showToast('Meal Planner feature coming in Week 6!', 'info');
+                utils.showToast('Meal Planner coming soon!', 'info');
             });
         }
     },
@@ -160,6 +164,19 @@ const app = {
         this.setupClearAllFavorites();
         
         console.log('Favorites Page Ready!');
+    },
+
+    /**
+     * Initialize shopping list page
+     */
+    async initShoppingListPage() {
+        console.log('Initializing Shopping List Page...');
+        
+        // Import and initialize shopping list module
+        const { default: shoppingList } = await import('./modules/shoppingList.js');
+        shoppingList.init();
+        
+        console.log('Shopping List Page Ready!');
     },
 
     /**

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find recipes based on ingredients you have, plan meals, and track nutrition">
-    <title>Recipe Finder - Search Recipes by Ingredients</title>
+    <meta name="description" content="Find recipes based on ingredients you have. Plan meals, track nutrition, and reduce food waste.">
+    <title>Recipe Finder - Find Recipes by Ingredients</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <!-- ========== HEADER / NAVIGATION ========== -->
+    
+    <!-- ========== HEADER ========== -->
     <header class="header">
         <div class="header-container">
             <!-- Logo -->
@@ -27,7 +28,7 @@
                 <i class="fa-solid fa-utensils logo-icon"></i>
                 Recipe Finder
             </a>
-
+            
             <!-- Navigation Menu -->
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link active">
@@ -36,14 +37,14 @@
                 <a href="favorites.html" class="nav-link">
                     <i class="fa-solid fa-heart"></i> Favorites
                 </a>
-                <a href="#" class="nav-link" id="shoppingListLink">
+                <a href="shopping-list.html" class="nav-link">
                     <i class="fa-solid fa-shopping-cart"></i> Shopping List
                 </a>
                 <a href="#" class="nav-link" id="mealPlannerLink">
-                    <i class="fa-solid fa-calendar-alt"></i> Meal Planner
+                    <i class="fa-solid fa-calendar"></i> Meal Planner
                 </a>
             </nav>
-
+            
             <!-- Mobile Menu Toggle -->
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
                 <i class="fa-solid fa-bars"></i>
@@ -54,14 +55,15 @@
     <!-- ========== MAIN CONTENT ========== -->
     <main class="main-wrapper">
         <div class="page-container">
-            <!-- Page Title & Search Bar -->
-            <section class="search-header">
-                <h1 class="text-center">Find Recipes with Your Ingredients</h1>
-                <p class="text-center text-secondary mb-lg">
-                    Enter the ingredients you have and discover delicious recipes
-                </p>
+            
+            <!-- Page Header -->
+            <section class="page-header mb-xl">
+                <h1 class="text-center">Find Your Perfect Recipe</h1>
+                <p class="text-center text-secondary">Search by ingredients you have and discover delicious meals</p>
+            </section>
 
-                <!-- Search Bar -->
+            <!-- Search Bar -->
+            <section class="search-section mb-xl">
                 <div class="search-wrapper">
                     <i class="fa-solid fa-search search-icon"></i>
                     <input 
@@ -69,17 +71,10 @@
                         class="input-field search-input" 
                         id="ingredientSearch"
                         placeholder="Enter ingredients (e.g., chicken, rice, tomatoes)"
-                        aria-label="Search ingredients"
+                        aria-label="Search by ingredients"
                     >
                 </div>
-
-                <!-- Selected Ingredients Tags -->
-                <div class="selected-ingredients mt-md" id="selectedIngredients">
-                    <!-- Dynamic tags will be inserted here -->
-                </div>
-
-                <!-- Search Button -->
-                <div class="text-center mt-md">
+                <div class="flex-center mt-md">
                     <button class="btn btn-primary btn-lg" id="searchBtn">
                         <i class="fa-solid fa-search"></i>
                         Search Recipes
@@ -88,14 +83,14 @@
             </section>
 
             <!-- Two Column Layout: Filters + Results -->
-            <div class="layout-two-column mt-xl">
+            <div class="layout-two-column">
+                
                 <!-- ========== FILTER SIDEBAR ========== -->
-                <aside class="filter-sidebar">
-                    <!-- Dietary Restrictions -->
-                    <section class="filter-section">
-                        <h3 class="filter-title">
-                            <i class="fa-solid fa-filter"></i> Dietary Filters
-                        </h3>
+                <aside class="filter-sidebar" id="filterSidebar">
+                    
+                    <!-- Dietary Filters -->
+                    <div class="filter-section">
+                        <h3 class="filter-title">Dietary Restrictions</h3>
                         <div class="filter-group" id="dietaryFilters">
                             <label class="checkbox-wrapper">
                                 <input type="checkbox" class="checkbox" value="vegetarian">
@@ -115,30 +110,24 @@
                             </label>
                             <label class="checkbox-wrapper">
                                 <input type="checkbox" class="checkbox" value="ketogenic">
-                                <span>Ketogenic</span>
+                                <span>Keto</span>
                             </label>
                             <label class="checkbox-wrapper">
                                 <input type="checkbox" class="checkbox" value="paleo">
                                 <span>Paleo</span>
                             </label>
                         </div>
-                    </section>
+                    </div>
 
                     <div class="divider"></div>
 
-                    <!-- Cuisine Type -->
-                    <section class="filter-section">
-                        <h3 class="filter-title">
-                            <i class="fa-solid fa-globe"></i> Cuisine Type
-                        </h3>
+                    <!-- Cuisine Type Filters -->
+                    <div class="filter-section">
+                        <h3 class="filter-title">Cuisine Type</h3>
                         <div class="filter-group" id="cuisineFilters">
                             <label class="checkbox-wrapper">
                                 <input type="checkbox" class="checkbox" value="african">
                                 <span>African</span>
-                            </label>
-                            <label class="checkbox-wrapper">
-                                <input type="checkbox" class="checkbox" value="american">
-                                <span>American</span>
                             </label>
                             <label class="checkbox-wrapper">
                                 <input type="checkbox" class="checkbox" value="chinese">
@@ -153,11 +142,15 @@
                                 <span>Mexican</span>
                             </label>
                             <label class="checkbox-wrapper">
+                                <input type="checkbox" class="checkbox" value="american">
+                                <span>American</span>
+                            </label>
+                            <label class="checkbox-wrapper">
                                 <input type="checkbox" class="checkbox" value="indian">
                                 <span>Indian</span>
                             </label>
                         </div>
-                    </section>
+                    </div>
 
                     <div class="divider"></div>
 
@@ -166,59 +159,66 @@
                         <i class="fa-solid fa-times"></i>
                         Clear All Filters
                     </button>
+
                 </aside>
 
-                <!-- ========== RECIPE RESULTS SECTION ========== -->
+                <!-- ========== RECIPE RESULTS ========== -->
                 <section class="recipe-results">
-                    <!-- Loading Spinner -->
-                    <div class="loading-container text-center hidden" id="loadingSpinner">
-                        <div class="spinner"></div>
-                        <p class="mt-md">Searching for recipes...</p>
+                    
+                    <!-- Loading State -->
+                    <div class="loading-state hidden" id="loadingState">
+                        <div class="flex-center" style="padding: 4rem 0;">
+                            <div class="spinner spinner-lg"></div>
+                        </div>
+                        <p class="text-center text-secondary">Finding delicious recipes...</p>
                     </div>
 
-                    <!-- Empty State (Before Search) -->
+                    <!-- Empty State (Initial) -->
                     <div class="empty-state" id="emptyState">
                         <div class="empty-state-icon">
-                            <i class="fa-solid fa-utensils"></i>
+                            <i class="fa-solid fa-search"></i>
                         </div>
                         <h2 class="empty-state-title">Start Your Recipe Search</h2>
                         <p class="empty-state-text">
-                            Enter ingredients you have and we'll find perfect recipes for you
+                            Enter ingredients you have and click search to find amazing recipes!
                         </p>
                     </div>
 
                     <!-- No Results State -->
                     <div class="empty-state hidden" id="noResultsState">
                         <div class="empty-state-icon">
-                            <i class="fa-solid fa-search"></i>
+                            <i class="fa-solid fa-bowl-food"></i>
                         </div>
                         <h2 class="empty-state-title">No Recipes Found</h2>
                         <p class="empty-state-text">
-                            Try different ingredients or adjust your filters
+                            Try different ingredients or remove some filters to see more results.
                         </p>
                     </div>
 
-                    <!-- Recipe Grid -->
+                    <!-- Recipe Grid (Will be populated by JavaScript) -->
                     <div class="recipe-grid hidden" id="recipeGrid">
-                        <!-- Recipe cards will be dynamically inserted here -->
+                        <!-- Recipe cards will be inserted here by JavaScript -->
                     </div>
 
                     <!-- Load More Button -->
-                    <div class="text-center mt-xl hidden" id="loadMoreContainer">
+                    <div class="flex-center mt-xl hidden" id="loadMoreContainer">
                         <button class="btn btn-primary" id="loadMoreBtn">
-                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-chevron-down"></i>
                             Load More Recipes
                         </button>
                     </div>
+
                 </section>
+
             </div>
+
         </div>
     </main>
 
     <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2024 Recipe Finder.</p>
+            <p>&copy; 2024 Recipe Finder</p>
             <p class="mt-sm">
                 <small>Powered by Spoonacular, Nutritionix & Unsplash APIs</small>
             </p>
@@ -227,5 +227,6 @@
 
     <!-- ========== JAVASCRIPT MODULES ========== -->
     <script type="module" src="js/app.js"></script>
+
 </body>
 </html>
