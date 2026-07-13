@@ -158,7 +158,7 @@ const shoppingList = {
                     data-item-id="${item.id}"
                 >
                 <span style="flex: 1;">
-                    <strong>${utils.capitalize(item.name)}</strong>
+                    <strong>${utils.sanitizeHTML(utils.capitalize(item.name))}</strong>
                     ${amountText ? `<span class="text-secondary ml-sm">${amountText}</span>` : ''}
                 </span>
             </label>

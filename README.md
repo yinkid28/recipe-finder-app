@@ -2,9 +2,9 @@
 
 A comprehensive web application that helps users find recipes based on available ingredients, manage shopping lists, save favorites, and track nutritional information - all while reducing food waste and making meal planning easier.
 
-**Live Demo:** [https://YOUR-USERNAME.github.io/recipe-finder-app](https://YOUR-USERNAME.github.io/recipe-finder-app)
+**Live Demo:** [https://yinkid28.github.io/recipe-finder-app](https://yinkid28.github.io/recipe-finder-app)
 
-**GitHub Repository:** [https://github.com/YOUR-USERNAME/recipe-finder-app](https://github.com/YOUR-USERNAME/recipe-finder-app)
+**GitHub Repository:** [https://github.com/yinkid28/recipe-finder-app](https://github.com/yinkid28/recipe-finder-app)
 
 ---
 
@@ -155,7 +155,7 @@ Recipe Finder was developed as a comprehensive solution to common food-related c
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/YOUR-USERNAME/recipe-finder-app.git
+git clone https://github.com/yinkid28/recipe-finder-app.git
 cd recipe-finder-app
 ```
 
@@ -459,7 +459,7 @@ This project demonstrates mastery of:
 - **Font Awesome:** Icon library
 - **Google Fonts:** Poppins and Inter typefaces
 - **WDD 330:** Course materials and guidance
-- **Instructor:** [Your Instructor's Name]
+- **Instructor:** WDD 330 Instructor
 
 ---
 
@@ -471,7 +471,7 @@ This project was created for educational purposes as part of WDD 330 coursework.
 
 ## 👤 Author
 
-**Your Name**
+**Adeyinka ADedayo**
 - GitHub: [@your-username](https://github.com/yinkid28/recipe-finder-app/tree/main)
 - Project: [Recipe Finder](https://yinkid28.github.io/recipe-finder-app/)
 

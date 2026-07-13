@@ -1,5 +1,5 @@
 # API Keys and Configuration
-js/config.js
+
 config.js
 *.config.js
 .env

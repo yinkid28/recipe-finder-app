@@ -20,7 +20,7 @@ const apiService = {
             // Build query parameters
             const params = new URLSearchParams({
                 apiKey: API_KEYS.spoonacular,
-                ingredients: ingredients,
+                includeIngredients: ingredients,
                 number: 12, // Number of results to return
                 ranking: 2, // Maximize used ingredients
                 ignorePantry: true

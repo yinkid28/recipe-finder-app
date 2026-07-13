@@ -189,7 +189,7 @@ const recipeDetail = {
             const name = ingredient.name || ingredient.original;
 
             li.innerHTML = `
-                <span><strong>${utils.formatAmount(amount)} ${unit}</strong> ${name}</span>
+                <span><strong>${utils.formatAmount(amount)} ${utils.sanitizeHTML(unit)}</strong> ${utils.sanitizeHTML(name)}</span>
             `;
 
             ingredientsList.appendChild(li);
